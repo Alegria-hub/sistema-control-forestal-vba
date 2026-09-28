@@ -88,11 +88,12 @@ frmInventarioFisico
 frmBalance
 ```
 
-El código fuente VBA se irá exportando al repositorio en archivos `.bas`, `.frm` y `.cls` para permitir control de versiones y revisión del código fuera del archivo `.xlsm`.
+El código fuente VBA se encuentra en `src/vba/`. Los formularios incluyen sus archivos `.frm` y recursos binarios `.frx` correspondientes.
+
+> La versión publicada está **anonimizada**. Algunos nombres reales usados durante el desarrollo fueron sustituidos por valores DEMO para evitar exponer información de terceros.
 
 ## Próximos pasos
 
-- Exportar módulos y formularios VBA al repositorio.
 - Crear una versión DEMO del archivo con datos ficticios.
 - Documentar el modelo de datos y las reglas de negocio.
 - Completar pruebas integrales del módulo de balance.
