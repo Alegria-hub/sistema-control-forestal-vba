@@ -1,0 +1,13 @@
+# Excel temporary and local workbook files
+~$*.xls*
+*.xlsm
+*.xlsx
+*.xlsb
+
+# Local/sample data exports
+*.csv
+*.zip
+
+# OS/editor files
+Thumbs.db
+.DS_Store
