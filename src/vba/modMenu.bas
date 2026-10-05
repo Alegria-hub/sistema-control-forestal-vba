@@ -14,3 +14,14 @@ Public Sub AbrirMovimiento()
     frmMovimiento.Show
 
 End Sub
+Sub AbrirBalance()
+
+    frmBalance.Show
+
+End Sub
+Sub AbrirCancelarMovimiento()
+
+    frmCancelarMovimiento.Show
+
+End Sub
+

@@ -22,26 +22,49 @@ Public Function FechaValida(ByVal valor As String, ByVal nombreCampo As String) 
     FechaValida = True
 End Function
 Public Function NumeroPositivo(ByVal valor As String, ByVal nombreCampo As String) As Boolean
+    Dim numero As Double
 
-    If Not IsNumeric(valor) Then
+    On Error GoTo NumeroInvalido
 
-        MsgBox "El campo " & nombreCampo & " debe contener un número válido.", vbExclamation
+    numero = ValorDecimal(valor)
 
-        NumeroPositivo = False
-        Exit Function
-
-    End If
-
-    If CDbl(valor) <= 0 Then
-
+    If numero <= 0 Then
         MsgBox "El campo " & nombreCampo & " debe ser mayor que cero.", vbExclamation
-
         NumeroPositivo = False
         Exit Function
-
     End If
 
     NumeroPositivo = True
+    Exit Function
+
+NumeroInvalido:
+
+    MsgBox "El campo " & nombreCampo & " debe contener un número válido.", vbExclamation
+    NumeroPositivo = False
+
+End Function
+Public Function ValorDecimal(ByVal valor As Variant) As Double
+
+    Dim texto As String
+    Dim regex As Object
+
+    texto = Trim(CStr(valor))
+    texto = Replace(texto, " ", "")
+
+    ' Aceptar punto o coma como decimal
+    texto = Replace(texto, ",", ".")
+
+    Set regex = CreateObject("VBScript.RegExp")
+
+    regex.Pattern = "^[+-]?[0-9]+(\.[0-9]+)?$"
+
+    If Not regex.Test(texto) Then
+        Err.Raise 5
+    End If
+
+    ' Val siempre interpreta el punto como decimal
+    ValorDecimal = Val(texto)
+
 
 End Function
 Public Function MedidaValida(ByVal valor As String) As Boolean

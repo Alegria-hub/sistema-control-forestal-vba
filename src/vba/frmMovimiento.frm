@@ -46,7 +46,7 @@ Private Sub cmdAgregarDetalle_Click()
         lstDetalles.List(indiceDetalleEditando, 0) = cboTipoDetalle.Value
         If cboTipoDetalle.Value = "MADERA" Then
             lstDetalles.List(indiceDetalleEditando, 1) = cboEspecie.Value
-            lstDetalles.List(indiceDetalleEditando, 2) = CDbl(txtCantidadM3.Value)
+            lstDetalles.List(indiceDetalleEditando, 2) = ValorDecimal(txtCantidadM3.Value)
             lstDetalles.List(indiceDetalleEditando, 3) = ""
         ElseIf cboTipoDetalle.Value = "PRODUCTO_TERMINADO" Then
             lstDetalles.List(indiceDetalleEditando, 1) = ""
@@ -58,7 +58,7 @@ Private Sub cmdAgregarDetalle_Click()
         If cboTipoDetalle.Value = "MADERA" Then
             lstDetalles.AddItem cboTipoDetalle.Value
             lstDetalles.List(lstDetalles.ListCount - 1, 1) = cboEspecie.Value
-            lstDetalles.List(lstDetalles.ListCount - 1, 2) = CDbl(txtCantidadM3.Value)
+            lstDetalles.List(lstDetalles.ListCount - 1, 2) = ValorDecimal(txtCantidadM3.Value)
             lstDetalles.List(lstDetalles.ListCount - 1, 3) = ""
         ElseIf cboTipoDetalle.Value = "PRODUCTO_TERMINADO" Then
              ' aquí pondremos la lógica para producto terminado
@@ -161,7 +161,15 @@ Private Sub cmdGuardar_Click()
         nuevaFilaDetalle.Range.Columns(tblDetalleMov.ListColumns("ID_MOVIMIENTO").Index).Value = idMovimiento
         nuevaFilaDetalle.Range.Columns(tblDetalleMov.ListColumns("TIPO_DETALLE").Index).Value = lstDetalles.List(i, 0)
         nuevaFilaDetalle.Range.Columns(tblDetalleMov.ListColumns("ESPECIE").Index).Value = lstDetalles.List(i, 1)
-        nuevaFilaDetalle.Range.Columns(tblDetalleMov.ListColumns("CANTIDAD_M3").Index).Value = lstDetalles.List(i, 2)
+        If lstDetalles.List(i, 0) = "MADERA" Then
+            nuevaFilaDetalle.Range.Columns( _
+                tblDetalleMov.ListColumns("CANTIDAD_M3").Index _
+            ).Value = ValorDecimal(lstDetalles.List(i, 2))
+        Else
+            nuevaFilaDetalle.Range.Columns( _
+                tblDetalleMov.ListColumns("CANTIDAD_M3").Index _
+            ).Value = ""
+        End If
         nuevaFilaDetalle.Range.Columns(tblDetalleMov.ListColumns("PRODUCTO_TERMINADO").Index).Value = lstDetalles.List(i, 3)
     Next i
     
